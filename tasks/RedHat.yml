@@ -1,6 +1,6 @@
 - name: Install Certbot
   yum:
-    name: [certbot,certbot-apache]
+    name: [certbot,certbot-apache,certbot-nginx]
   ignore_errors: yes
 
 - name: Set up automatic renewal
