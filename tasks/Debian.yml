@@ -3,12 +3,9 @@
   - name: Import Certbot PPA
     apt_repository:
       repo: ppa:certbot/certbot
-      
   - name: Install Certbot
     apt: 
       name: [certbot,python-certbot-nginx]
-      
   - name: Set up automatic renewal
     shell: echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && /usr/local/bin/certbot-auto renew" | sudo tee -a /etc/crontab > /dev/null
-  
   when: preend_certbot
