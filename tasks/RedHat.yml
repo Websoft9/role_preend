@@ -1,6 +1,6 @@
 - block:
   - name: Install Certbot
-    shell: yum install -y certbot certbot-apache certbot-nginx 2>/dev/null
+    shell: yum install -y certbot certbot-apache certbot-nginx >/dev/null
     ignore_errors: yes
     
   - pip:
