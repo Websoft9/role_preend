@@ -2,8 +2,7 @@
 
 ## To do
 
-1. certbot自动更新进一步研究和验证
-2. AmazonLinux支持
+1. 
 
 ## Logs
 
