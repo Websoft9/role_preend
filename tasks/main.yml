@@ -1,2 +1,7 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
+ 
+# if initpass is null or initpasswd file is not exist , stop and exit
+- name: Check initpasswd
+  fail: msg="initpassword is null,exit!"
+  when: init_mode = false;
