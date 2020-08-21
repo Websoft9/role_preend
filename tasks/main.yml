@@ -1,6 +1,12 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
- 
+
+- name: Judge file is empty
+  shell: |
+    [  -f /credentials/password.txt ] && [  -f /credentials/password.txt ] && [[ `cat /credentials/init.sh |wc -l` -ne 0 ]] && [[ `cat /credentials/password.txt |wc -l` -ne 0 ]]&&         init_mode=true || init_mode=false
+    echo $init_mode
+  register: init_mode
+  
 # if initpass is null or initpasswd file is not exist , stop and exit
 - name: Check initpasswd
   fail: msg="initpassword is null,exit!"
