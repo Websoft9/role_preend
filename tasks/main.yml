@@ -3,7 +3,7 @@
 
 - name: Judge file is empty
   shell: |
-    [  -s /credentials/password.txt ] && [  -s /credentials/init.sh ] && init_mode=true || init_mode=false
+    [  -s /credentials/password.txt ] && [  -s /credentials/init.sh ] && preend_initpasswd=true || preend_initpasswd=false
     echo $preend_initpasswd
   register: preend_initpasswd
   
