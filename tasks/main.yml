@@ -1,13 +1,2 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
-
-- name: Judge file is empty
-  shell: |
-    [  -s /credentials/password.txt ] && [  -s /credentials/init.sh ] && preend_initpasswd=true || preend_initpasswd=false
-    echo $preend_initpasswd
-  register: preend_initpasswd
-  
-# if initpass is null or initpasswd file is not exist , stop and exit
-- name: Check php_initpasswd
-  fail: msg="init_password role is not done,exit!"
-  when: preend_initpasswd.stdout == "false"
