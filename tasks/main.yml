@@ -4,10 +4,10 @@
 - name: Judge file is empty
   shell: |
     [  -s /credentials/password.txt ] && [  -s /credentials/init.sh ] && init_mode=true || init_mode=false
-    echo $init_mode
-  register: init_mode
+    echo $preend_initpasswd
+  register: preend_initpasswd
   
 # if initpass is null or initpasswd file is not exist , stop and exit
-- name: Check initpasswd
-  fail: msg="initpassword is null,exit!"
-  when: init_mode.stdout == "false"
+- name: Check php_initpasswd
+  fail: msg="init_password role is not done,exit!"
+  when: preend_initpasswd.stdout == "false"
