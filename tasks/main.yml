@@ -10,4 +10,4 @@
 # if initpass is null or initpasswd file is not exist , stop and exit
 - name: Check initpasswd
   fail: msg="initpassword is null,exit!"
-  when: init_mode.stdout == false;
+  when: init_mode.stdout == "false";
