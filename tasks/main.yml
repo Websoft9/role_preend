@@ -3,3 +3,4 @@
 
 - name: chmod 403 forbidden
   shell: chmod 755 -R /data
+  failed_when: False
