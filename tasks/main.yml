@@ -3,10 +3,10 @@
   
 - name: Get node version
   shell: ls /opt/nvm/versions/node/*/bin/
-  register: node_clis
+  register: nodejs_clis
 
 - name: Delete link for Node.js
   file:
     path: '/usr/bin/{{item}}'
     state: absent
-  with_items: "{{node_clis.stdout_lines |list}}"
+  with_items: "{{nodejs_clis.stdout_lines |list}}"
