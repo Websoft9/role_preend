@@ -1,6 +1,2 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
-
-- name: chmod 403 forbidden
-  shell: chmod 755 -R /data
-  failed_when: False
