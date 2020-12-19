@@ -1,12 +1,14 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
-  
-- name: Get node version
-  shell: ls /opt/nvm/versions/node/*/bin/
-  register: node_clis
 
-- name: Delete link for Node.js
-  file:
-    path: '/usr/bin/{{item}}'
-    state: absent
-  with_items: "{{node_clis.stdout_lines |list}}"
+# match the role_nodejs
+- block:
+  - name: Get Node cli lists
+    shell: ls /opt/nvm/versions/node/*/bin/
+    register: node_clis
+
+  - name: Delete soft link from /usr/bin directory
+    file:
+      path: '/usr/bin/{{item}}'
+      state: absent
+    with_items: "{{node_clis.stdout_lines |list}}"
