@@ -1,7 +1,7 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-# match the role_nodejs
+# Match the role_nodejs where add softlink for Node
 - block:
   - name: Get Node cli lists
     shell: ls /opt/nvm/versions/node/*/bin/
