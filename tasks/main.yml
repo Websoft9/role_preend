@@ -8,14 +8,13 @@
   register: nodejs_result
 
 - block:
-  - name: Get node version
+  - name: Get Node cli lists
     shell: ls /opt/nvm/versions/node/*/bin/
     register: nodejs_clis
 
-  - name: Delete link for Node.js
+  - name: Delete soft link from /usr/bin directory
     file:
       path: '/usr/bin/{{item}}'
       state: absent
     with_items: "{{nodejs_clis.stdout_lines |list}}"
   when: nodejs_result.stat.exists
-
