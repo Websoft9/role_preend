@@ -1,14 +1,14 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
+- block:
+  - name: Get node version
+    shell: test -d /opt/nvm/versions/node/ && ls /opt/nvm/versions/node/*/bin/
+    register: nodejs_clis
 
-- name: Get node version
-  shell: test -d /opt/nvm/versions/node/ && ls /opt/nvm/versions/node/*/bin/
-  register: nodejs_clis
-
-- name: Delete link for Node.js
-  file:
-    path: '/usr/bin/{{item}}'
-    state: absent
-  with_items: "{{nodejs_clis.stdout_lines |list}}"
+  - name: Delete link for Node.js
+    file:
+      path: '/usr/bin/{{item}}'
+      state: absent
+    with_items: "{{nodejs_clis.stdout_lines |list}}"
   when: nodejs_clis is defined and nodejs_clis is not none 
