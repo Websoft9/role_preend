@@ -18,3 +18,25 @@
       state: absent
     with_items: "{{nodejs_clis.stdout_lines |list}}"
   when: nodejs_result.stat.exists
+
+# Match the role_ruby where add softlink for Node
+- name: Check the ruby dir exists
+  stat:
+    path: /usr/local/rvm/rubies
+  register: ruby_result
+
+- block:
+  - name: Get ruby version
+    shell: ls /usr/local/rvm/rubies |grep ruby
+    register: ruby_dir_name
+
+  - name: Get ruby clis
+    shell: ls /usr/local/rvm/rubies/{{ruby_dir_name.stdout}}/bin
+    register: ruby_clis
+
+  - name: Delete soft link from /usr/bin directory
+    file:
+      path: '/usr/bin/{{item}}'
+      state: absent
+    with_items: "{{ruby_clis.stdout_lines |list}}"
+  when: ruby_result.stat.exists
