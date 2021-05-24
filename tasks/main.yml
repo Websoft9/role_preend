@@ -42,17 +42,9 @@
   when: ruby_result.stat.exists
 
 # display os version and image name
-- block:
-  - name: Get system version
-    shell: |
-      image_name={{image}}
-      echo ${image_name##*-}
-    register: system_version
+- name: Display os version
+  shell: sudo echo  "System version:" "{{ansible_distribution}}" "{{ansible_distribution_version}}"  |sudo tee -a /data/logs/install_version.txt
 
-  - name: Display os version
-    shell: sudo echo  "System version:" "{{system_version.stdout}}"  |sudo tee -a /data/logs/install_version.txt
-
-  - name: Display image name
-    shell: sudo echo "Image name:" "{{image}}" |sudo tee -a /data/logs/install_version.txt
-
+- name: Display image name
+  shell: sudo echo "Image name:" "{{image}}" |sudo tee -a /data/logs/install_version.txt
   when: image is defined and image is not none
