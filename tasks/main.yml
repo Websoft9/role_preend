@@ -1,24 +1,6 @@
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-# Match the role_nodejs where add softlink for Node
-- name: Check the nodejs dir exists
-  stat:
-    path: /opt/nvm/versions/node
-  register: nodejs_result
-
-- block:
-  - name: Get Node cli lists
-    shell: ls /opt/nvm/versions/node/*/bin/
-    register: nodejs_clis
-
-  - name: Delete soft link from /usr/bin directory
-    file:
-      path: '/usr/bin/{{item}}'
-      state: absent
-    with_items: "{{nodejs_clis.stdout_lines |list}}"
-  when: nodejs_result.stat.exists
-
 # display os version and image name
 - name: Display os version
   shell: sudo echo  "System version:" "{{ansible_distribution}}" "{{ansible_distribution_version}}"  |sudo tee -a /data/logs/install_version.txt
