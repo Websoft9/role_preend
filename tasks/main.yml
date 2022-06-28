@@ -8,8 +8,3 @@
 - name: Display image name
   shell: sudo echo "Image name:" "{{image}}" |sudo tee -a /data/logs/install_version.txt
   when: image is defined and image is not none
-
-- name: Add dependencies_apps to app's network
-  shell: docker network connect {{appname}} {{item}}
-  with_items: "{{ dependencies_apps }}"
-  when: (dependencies_apps is defined) and (dependencies_apps != none)
